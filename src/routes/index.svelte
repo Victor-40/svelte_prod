@@ -27,7 +27,7 @@
 
 	@media (min-width: 480px) {
 		h1 {
-			font-size: 4em;
+			font-size: 2em;
 		}
 	}
 </style>
@@ -39,7 +39,7 @@
 <h1>Great success!</h1>
 
 <figure>
-	<img alt='Borat' src='great-success.png'>
+	<!-- <img alt='Borat' src='great-success.png'> -->
 	<figcaption>HIGH FIVE!</figcaption>
 </figure>
 
