@@ -1,12 +1,33 @@
 <script>
-  const freeVm = [
-    "111111111111",
-    "2222222222222",
-    "3333333333333333",
-    "4444444444444",
-    "5555555555555"
-  ];
-  const busyVm = ["3333333333333333", "4444444444444", "5555555555555"];
+  import axios from "axios";
+  import { onMount } from "svelte";
+
+  const path = "http://localhost:5000/api/cfg";
+  
+  let freeVm = [];
+  let busyVm = [];
+  
+  function test_cfg(c) {
+    console.log(c);
+    for (let key in c) {
+      if (c[key].status === "free") {
+        freeVm.push(key.replace(".vmx", ""));
+        freeVm = freeVm;
+      } else {
+        busyVm.push(key.replace(".vmx", ""));
+        busyVm = busyVm;
+      }
+    }
+  };
+
+// onMount(getTodos());
+
+// function getTodos() {
+axios
+  .get(path)
+  .then(response  => {
+    test_cfg(response.data);
+  });
 </script>
 
 <style>
