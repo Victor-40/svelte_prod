@@ -1,4 +1,6 @@
 <script>
+  import axios from "axios";
+
   let tag = "";
   let build = "";
   let subdir = "";
@@ -15,11 +17,32 @@
     "EFD.V5"
   ];
   let prodList = ["CFW", "EFD.LAB", "EFD.NX", "EFD.PRO", "EFD.SE", "EFD.V5"];
-  
+  let setupParams = {};
+  let setupCount = 0;
+  const path = "http://localhost:5000/api/findsetups";
+  let resp_cfg = {};
+
   function findSetups() {
-    // alert('Q');
     showParam = true;
+    setupParams.build = build;
+    setupParams.tag = tag;
+    setupParams.subdir = subdir;
+    setupParams.products = checkedNames; 
+
+    axios
+    .post(path, setupParams)
+    .then(response  => {
+      resp_cfg = response.data;
+      // console.log(resp_cfg);
+      resp_cfg = resp_cfg;
+      setupCount = resp_cfg.length;
+    })
+  };
+
+  function makeXls() {
+    alert("makeXls");
   }
+
 </script>
 
 <style>
@@ -64,9 +87,16 @@
 <br><br>
 <button on:click={findSetups}>Find Setups</button>
 <hr />
+
 {#if showParam}
-  <p>{checkedNames}</p>
-  <p>{subdir}</p>
-  <p>tag-{tag}</p>
-  <p>build-{build}</p>
+  <h2>{setupCount} setup(s) was found</h2>
+  <ul>
+    {#each resp_cfg as item}
+      <li>{item}</li>
+    {/each}
+  </ul>
+  <!-- <p>{resp_cfg}</p> -->
 {/if}
+<br>
+<button on:click={makeXls}>Make XLS config</button>
+

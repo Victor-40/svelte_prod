@@ -31,12 +31,12 @@ axios
 </script>
 
 <style>
-  table {
+  /* table {
     border: 1px solid;
-  }
+  } */
   td,
   th {
-    padding-left: 5em;
+    padding-left: 7em;
     text-align: left;
     vertical-align: top;
   }
@@ -46,6 +46,7 @@ axios
   }
   h2 {
     text-align: center;
+    margin-bottom: 30px;
   }
   ul {
     list-style: none;
