@@ -19,30 +19,40 @@
   let prodList = ["CFW", "EFD.LAB", "EFD.NX", "EFD.PRO", "EFD.SE", "EFD.V5"];
   let setupParams = {};
   let setupCount = 0;
-  const path = "http://localhost:5000/api/findsetups";
+  let cfgCount = 0;
+
   let resp_cfg = {};
+  let fullCfg = [];
 
   function findSetups() {
+    const path = "http://localhost:5000/api/findsetups";
     showParam = true;
     setupParams.build = build;
     setupParams.tag = tag;
     setupParams.subdir = subdir;
-    setupParams.products = checkedNames; 
+    setupParams.products = checkedNames;
 
-    axios
-    .post(path, setupParams)
-    .then(response  => {
+    axios.post(path, setupParams).then(response => {
       resp_cfg = response.data;
       // console.log(resp_cfg);
       resp_cfg = resp_cfg;
       setupCount = resp_cfg.length;
-    })
-  };
-
-  function makeXls() {
-    alert("makeXls");
+    });
   }
 
+  function makeXls() {
+    const path = "http://127.0.0.1:5000/api/makexls";
+    axios
+      .post(path, resp_cfg)
+      .then(res => {
+        fullCfg = res.data;
+        cfgCount = fullCfg.length;
+      })
+      .catch(error => {
+        // eslint-disable-next-line
+        console.error(error);
+      });
+  }
 </script>
 
 <style>
@@ -84,7 +94,8 @@
   <input type="radio" bind:group={subdir} value={'_Main'} />
   _Main
 </label>
-<br><br>
+<br />
+<br />
 <button on:click={findSetups}>Find Setups</button>
 <hr />
 
@@ -95,8 +106,16 @@
       <li>{item}</li>
     {/each}
   </ul>
-  <!-- <p>{resp_cfg}</p> -->
 {/if}
-<br>
-<button on:click={makeXls}>Make XLS config</button>
+<br />
+{#if setupCount}
+  <button on:click={makeXls}>Make XLS config</button>
+  <hr />
+  <h2>{cfgCount} record(s) was created</h2>
+{/if}
 
+<!-- {#each fullCfg as item}
+  <ul>
+    <li>{item}</li>
+  </ul>
+{/each} -->
