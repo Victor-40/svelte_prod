@@ -25,7 +25,7 @@
   let fullCfg = [];
 
   function findSetups() {
-    const path = "http://localhost:5000/api/findsetups";
+    const path = "http://rum-cherezov-dt:5000/api/findsetups";
     showParam = true;
     setupParams.build = build;
     setupParams.tag = tag;
@@ -41,7 +41,7 @@
   }
 
   function makeXls() {
-    const path = "http://127.0.0.1:5000/api/makexls";
+    const path = "http://rum-cherezov-dt:5000/api/makexls";
     axios
       .post(path, resp_cfg)
       .then(res => {

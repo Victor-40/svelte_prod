@@ -2,7 +2,7 @@
   import axios from "axios";
   import { onMount } from "svelte";
 
-  const path = "http://localhost:5000/api/cfg";
+  const path = "http://rum-cherezov-dt:5000/api/cfg";
   
   let freeVm = [];
   let busyVm = [];
