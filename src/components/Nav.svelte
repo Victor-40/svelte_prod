@@ -54,6 +54,7 @@
 		<li><a class:selected='{segment === undefined}' href='.'>Home</a></li>
 		<li><a class:selected='{segment === "status"}' href='status'>Status VM</a></li>
 		<li><a class:selected='{segment === "find"}' href='find'>Find</a></li>
+		<li><a class:selected='{segment === "startclear"}' href='startclear'>Start clear VM</a></li>
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
