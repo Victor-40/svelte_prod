@@ -8,7 +8,7 @@
   let busyVm = [];
   
   function test_cfg(c) {
-    console.log(c);
+    // console.log(c);
     for (let key in c) {
       if (c[key].status === "free") {
         freeVm.push(key.replace(".vmx", ""));

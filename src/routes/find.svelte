@@ -23,6 +23,7 @@
 
   let resp_cfg = {};
   let fullCfg = [];
+  // let resp
 
   function findSetups() {
     const path = "http://rum-cherezov-dt:5000/api/findsetups";
@@ -53,7 +54,16 @@
         console.error(error);
       });
   }
+  function startTestset() {
+    const path = "http://rum-cherezov-dt:5000/api/start_testset";
+    axios
+      .get(path)
+      .then(response  => {
+        console.log(response.data);
+      });
+  }
 </script>
+
 
 <style>
   h2 {
@@ -111,7 +121,11 @@
 {#if setupCount}
   <button on:click={makeXls}>Make XLS config</button>
   <hr />
-  <h2>{cfgCount} record(s) was created</h2>
+  <h2>{cfgCount} record(s) was created for Testset</h2>
+{/if}
+
+{#if cfgCount}
+  <button on:click={startTestset}>Start Testset</button>
 {/if}
 
 <!-- {#each fullCfg as item}
