@@ -74,7 +74,7 @@
   }
 </style>
 
-<h2>Find Setups</h2>
+<h2>Find Setups and start Testset</h2>
 <h3>Input build tag</h3>
 <input size="50" maxlength="50" bind:value={tag} />
 <h3>Input build number</h3>

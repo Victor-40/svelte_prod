@@ -52,12 +52,13 @@
 <nav>
 	<ul>
 		<li><a class:selected='{segment === undefined}' href='.'>Home</a></li>
-		<li><a class:selected='{segment === "status"}' href='status'>Status VM</a></li>
-		<li><a class:selected='{segment === "find"}' href='find'>Find</a></li>
-		<li><a class:selected='{segment === "startclear"}' href='startclear'>Start clear VM</a></li>
+		<li><a class:selected='{segment === "allcfg"}' href='allcfg'>All_configs</a></li>
+		<li><a class:selected='{segment === "status"}' href='status'>Status_VM</a></li>
+		<li><a class:selected='{segment === "find"}' href='find'>Start_Testset</a></li>
+		<li><a class:selected='{segment === "startclear"}' href='startclear'>Start_clear_VM</a></li>
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class:selected='{segment === "blog"}' href='blog'>blog</a></li>
+		<!-- <li><a rel=prefetch class:selected='{segment === "blog"}' href='blog'>blog</a></li> -->
 	</ul>
 </nav>
