@@ -99,8 +99,7 @@ axios
 <tr></tr>
 </table>
 
-
-  
+ 
 
   <br />
   <button on:click={showSelected}>Show selected</button>
