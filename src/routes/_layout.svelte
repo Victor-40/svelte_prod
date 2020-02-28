@@ -1,22 +1,35 @@
 <script>
-	import Nav from '../components/Nav.svelte';
+  // import Nav from '../components/Nav.svelte';
+  import NavSide from "../components/NavSide.svelte";
 
-	export let segment;
+  export let segment;
 </script>
 
 <style>
-	main {
-		position: relative;
-		max-width: 56em;
-		background-color: rgb(240, 240, 240);
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
+  .sidenav {
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    left: 10px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+  }
+
+  .main {
+    margin-left: 170px; /* Same width as the sidebar + left position in px */
+    /* font-size: 18px; Increased text to enable scrolling */
+    padding: 0px 20px;
+  }
 </style>
 
-<Nav {segment}/>
+<!-- <Nav {segment}/> -->
 
-<main>
-	<slot></slot>
-</main>
+<div class="sidenav">
+  <NavSide {segment} />
+</div>
+
+<div class="main">
+  <slot />
+</div>

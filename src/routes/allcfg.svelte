@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
   const path = "http://rum-cherezov-dt:5000/api/allcfg";
-  
+
   let freeVm = [];
   let busyVm = [];
   let allCfg = {};
@@ -12,34 +12,50 @@
   let allWin = ["Windows 10", "Windows 7", "Windows 8"];
   let checkedWin = ["Windows 10", "Windows 7", "Windows 8"];
 
-  let allLang = ["English", "Chinese", "French", "German", "Italian", "Japanese", "Russian", "Turkish"];
-  let checkedLang = ["English", "Chinese", "French", "German", "Italian", "Japanese", "Russian", "Turkish"];
-
+  let allLang = [
+    "English",
+    "Chinese",
+    "French",
+    "German",
+    "Italian",
+    "Japanese",
+    "Russian",
+    "Turkish"
+  ];
+  let checkedLang = [
+    "English",
+    "Chinese",
+    "French",
+    "German",
+    "Italian",
+    "Japanese",
+    "Russian",
+    "Turkish"
+  ];
 
   function test_cfg(c) {
     allCfg = c;
     selectedCfg = c;
-  };
+  }
 
   function showSelected() {
     selectedCfg = {};
     for (let key in allCfg) {
       for (let item of checkedWin) {
-        if (key.startsWith(item) && checkedLang.includes(allCfg[key]['lang'], 0) ) {
+        if (
+          key.startsWith(item) &&
+          checkedLang.includes(allCfg[key]["lang"], 0)
+        ) {
           selectedCfg[key] = allCfg[key];
         }
       }
-    } 
-  };
+    }
+  }
 
+  // onMount(getTodos());
 
-
-// onMount(getTodos());
-
-// function getTodos() {
-axios
-  .get(path)
-  .then(response  => {
+  // function getTodos() {
+  axios.get(path).then(response => {
     test_cfg(response.data);
   });
 </script>
@@ -61,8 +77,7 @@ axios
     text-align: left;
     vertical-align: top;
   }
-
-  </style>
+</style>
 
 <svelte:head>
   <title>All cfg</title>
@@ -71,40 +86,41 @@ axios
 <div>
   <h2>All available configurations</h2>
 
-<table>
-<tr>
-<th><h3>Windows version:</h3></th>
-<th><h3>Language:</th>
-</tr>
-<tr>
-<td>
-  {#each allWin as win}
-    <label>
-      <input type="checkbox" bind:group={checkedWin} value={win} />
-      {win}
-    </label>
-    <br />
-  {/each}
-</td>
-<td>  
-  {#each allLang as lang}
-    <label>
-      <input type="checkbox" bind:group={checkedLang} value={lang} />
-      {lang}
-    </label>
-    <br />
-  {/each}
-</td>
-</tr>
-<tr></tr>
-</table>
-
- 
+  <table>
+    <tr>
+      <th>
+        <h3>Windows version:</h3>
+      </th>
+      <th>
+        <h3>Language:</h3>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        {#each allWin as win}
+          <label>
+            <input type="checkbox" bind:group={checkedWin} value={win} />
+            {win}
+          </label>
+          <br />
+        {/each}
+      </td>
+      <td>
+        {#each allLang as lang}
+          <label>
+            <input type="checkbox" bind:group={checkedLang} value={lang} />
+            {lang}
+          </label>
+          <br />
+        {/each}
+      </td>
+    </tr>
+    <tr />
+  </table>
 
   <br />
   <button on:click={showSelected}>Show selected</button>
   <hr />
-
 
   {#each Object.keys(selectedCfg) as item}
     <p class="un">{item}</p>
