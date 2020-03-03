@@ -10,6 +10,8 @@
   let selectedCfg1 = {};
   let selectedCfg2 = {};
   let selectedKeys = [];
+  let winClear = 'Unselect all'
+  let langClear = 'Clear all'
 
   let allWin = ["Windows 10", "Windows 7", "Windows 8"];
   let checkedWin = ["Windows 10", "Windows 7", "Windows 8"];
@@ -64,6 +66,40 @@
       }
     }
   }
+  function togllWin() {
+    if (winClear == 'Select all') {
+      winClear = 'Unselect all';
+      checkedWin = ["Windows 10", "Windows 7", "Windows 8"];
+      // checkedWin = checkedWin;
+    }
+    else {
+      winClear = 'Select all';
+      checkedWin = [];
+      // checkedWin = checkedWin;
+    }
+  }
+  function togllLang() {
+    if (langClear == 'Select all') {
+      langClear = 'Unselect all';
+      checkedLang = [
+        "English",
+        "Chinese",
+        "French",
+        "German",
+        "Italian",
+        "Japanese",
+        "Russian",
+        "Turkish"
+      ];
+      // checkedWin = checkedWin;
+    }
+    else {
+      langClear = 'Select all';
+      checkedLang = [];
+      // checkedWin = checkedWin;
+    }
+    
+  }
 
   // onMount(getTodos());
 
@@ -110,6 +146,9 @@
     </tr>
     <tr>
       <td>
+        <button on:click={togllWin}>{winClear}</button>
+        <br /><br> 
+
         {#each allWin as win}
           <label>
             <input type="checkbox" bind:group={checkedWin} value={win} />
@@ -119,6 +158,9 @@
         {/each}
       </td>
       <td>
+        <button on:click={togllLang}>{langClear}</button>
+        <br /><br> 
+
         {#each allLang as lang}
           <label>
             <input type="checkbox" bind:group={checkedLang} value={lang} />
