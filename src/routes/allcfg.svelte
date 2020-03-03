@@ -38,17 +38,17 @@
     selectedCfg = c;
   }
 
+  function fil(it) {
+    return checkedWin.includes(it.split(' ').slice(0, 2).join(' ')) && checkedLang.includes(allCfg[it]["lang"]);
+  } 
+
   function showSelected() {
     selectedCfg = {};
-    for (let key in allCfg) {
-      for (let item of checkedWin) {
-        if (
-          key.startsWith(item) &&
-          checkedLang.includes(allCfg[key]["lang"], 0)
-        ) {
+    let selectedKeys = Object.keys(allCfg).filter(fil);
+    console.log(selectedKeys);
+
+    for (let key of selectedKeys) {
           selectedCfg[key] = allCfg[key];
-        }
-      }
     }
   }
 
