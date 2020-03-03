@@ -7,7 +7,9 @@
   let freeVm = [];
   let busyVm = [];
   let allCfg = {};
-  let selectedCfg = {};
+  let selectedCfg1 = {};
+  let selectedCfg2 = {};
+  let selectedKeys = [];
 
   let allWin = ["Windows 10", "Windows 7", "Windows 8"];
   let checkedWin = ["Windows 10", "Windows 7", "Windows 8"];
@@ -39,16 +41,27 @@
   }
 
   function fil(it) {
-    return checkedWin.includes(it.split(' ').slice(0, 2).join(' ')) && checkedLang.includes(allCfg[it]["lang"]);
-  } 
+    return (
+      checkedWin.includes(
+        it
+          .split(" ")
+          .slice(0, 2)
+          .join(" ")
+      ) && checkedLang.includes(allCfg[it]["lang"])
+    );
+  }
 
   function showSelected() {
-    selectedCfg = {};
-    let selectedKeys = Object.keys(allCfg).filter(fil);
-    console.log(selectedKeys);
+    selectedCfg1 = {};
+    selectedCfg2 = {};
+    selectedKeys = Object.keys(allCfg).filter(fil);
 
     for (let key of selectedKeys) {
-          selectedCfg[key] = allCfg[key];
+      if (selectedKeys.indexOf(key) % 2 == 0) {
+        selectedCfg1[key] = allCfg[key];
+      } else {
+        selectedCfg2[key] = allCfg[key];
+      }
     }
   }
 
@@ -121,14 +134,31 @@
   <br />
   <button on:click={showSelected}>Show selected</button>
   <hr />
+  <table>
+    <tr>
+      <td>
+        {#each Object.keys(selectedCfg1) as item}
+          <p class="un">{item}</p>
+          <!-- <p>{allCfg[item]}</p> -->
+          <ul>
+            {#each selectedCfg1[item]['snap'] as snap}
+              <li>{snap}</li>
+            {/each}
+          </ul>
+        {/each}
+      </td>
+      <td>
+        {#each Object.keys(selectedCfg2) as item}
+          <p class="un">{item}</p>
+          <!-- <p>{allCfg[item]}</p> -->
+          <ul>
+            {#each selectedCfg2[item]['snap'] as snap}
+              <li>{snap}</li>
+            {/each}
+          </ul>
+        {/each}
+      </td>
+    </tr>
+  </table>
 
-  {#each Object.keys(selectedCfg) as item}
-    <p class="un">{item}</p>
-    <!-- <p>{allCfg[item]}</p> -->
-    <ul>
-      {#each selectedCfg[item]['snap'] as snap}
-        <li>{snap}</li>
-      {/each}
-    </ul>
-  {/each}
 </div>

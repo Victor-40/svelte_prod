@@ -21,6 +21,7 @@
     margin-left: 170px; /* Same width as the sidebar + left position in px */
     /* font-size: 18px; Increased text to enable scrolling */
     padding: 0px 20px;
+    /* background-color:  rgb(230, 245, 210); */
   }
 </style>
 
