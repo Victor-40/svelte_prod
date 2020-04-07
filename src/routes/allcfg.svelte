@@ -39,7 +39,7 @@
 
   function test_cfg(c) {
     allCfg = c;
-    selectedCfg = c;
+    // selectedCfg = c;
   }
 
   function fil(it) {

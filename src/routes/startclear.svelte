@@ -5,19 +5,24 @@
   const path = "http://rum-cherezov-dt:5000/api/startclear";
   
   let freeVm = [];
-  let busyVm = [];
-  let ttt = {};
+  let snapList = [];
+  let allCfg = {};
   let selectedVm = "";
   let selectedSnapshot = "";
-  $: busyVm = ttt[selectedVm];
+  let snaplist = [];
+  
+  // $: snapList = allCfg[selectedVm].snap;
 
   function test_cfg(c) {
     // console.log(c);
     for (let key in c) {
         freeVm.push(key);
-        freeVm = freeVm;
-        ttt = c;
+        
+        
     }
+    freeVm = freeVm;
+    allCfg = c;
+    console.log(allCfg)
   };
 
 // onMount(getTodos());
@@ -27,10 +32,10 @@ axios
   .get(path)
   .then(response  => {
     test_cfg(response.data);
-    // ttt = response.data;
-    // ttt = ttt;
-    // console.log("ttt");
-    // console.log(ttt);
+    // allCfg = response.data;
+    // allCfg = allCfg;
+    // console.log("allCfg");
+    // console.log(allCfg);
   });
 </script>
 
@@ -79,14 +84,14 @@ axios
       <td>
         {#each freeVm as free}
           <label>
-            <input type="radio" bind:group={selectedVm} value={free}  on:change={()=>{selectedSnapshot=''}} />
+            <input type="radio" bind:group={selectedVm} value={free}  on:change={()=>{selectedSnapshot=''; snapList = allCfg[selectedVm].snap;}} />
           {free}
           </label><br>
         {/each}
       </td>
       <td>
-        {#if busyVm}
-          {#each busyVm as sn}
+        {#if snapList}
+          {#each snapList as sn}
             <label>
               <input type="radio" bind:group={selectedSnapshot} value={sn} />
             {sn}
