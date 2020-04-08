@@ -36,19 +36,6 @@
 </script>
 
 <style>
-  /* table {
-    border: 1px solid;
-  } */
-  td,
-  th {
-    padding-left: 7em;
-    text-align: left;
-    vertical-align: top;
-  }
-  th {
-    padding-bottom: 20px;
-  }
- 
   h3 {
     text-align: center;
     margin-bottom: 30px;
@@ -56,52 +43,72 @@
   .wrapper {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: 300px 300px;
+    grid-template-columns: 400px 300px;
     grid-column-gap: 50px;
     justify-content: center;
   }
   .card {
-    padding:10px;
-    background-color: aquamarine;
+    padding: 10px;
+    /* background-color: aquamarine; */
+  }
+  .choice {
+    color: green;
+    font-weight: bold;
+  }
+  .btn {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .btn-style {
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: green;
   }
 </style>
 
 <svelte:head>
-  <title>About</title>
+  <title>ClearVM</title>
 </svelte:head>
 
-<div>
- 
-  <div class="wrapper">
-    <div class="card"> 
+<div class="wrapper">
+  <div class="card">
     <h3>Choose free VM</h3>
-      {#each freeVm as free}
-          <label>
-            <input
-              type="radio"
-              bind:group={selectedVm}
-              value={free}
-              on:change={() => {
-                selectedSnapshot = '';
-                snapList = allCfg[selectedVm].snap;
-              }} />
-            {free}
-          </label>
-          <br />
-        {/each}</div>
-    <div class="card">     
-    <h3>Choose snapshot</h3>
-     {#if snapList}
-          {#each snapList as sn}
-            <label>
-              <input type="radio" bind:group={selectedSnapshot} value={sn} />
-              {sn}
-            </label>
-            <br />
-          {/each}
-        {/if}</div>
+    {#each freeVm as free}
+      <label>
+        <input
+          type="radio"
+          bind:group={selectedVm}
+          value={free}
+          on:change={() => {
+            selectedSnapshot = '';
+            snapList = allCfg[selectedVm].snap;
+          }} />
+        {free}
+      </label>
+      <br />
+    {/each}
+    <br />
+    <hr />
+    <h3>Your choice:</h3>
+    <p class="choice">{selectedVm} -- {selectedSnapshot}</p>
   </div>
-  <p>Your choice:</p>
-  <p>{selectedVm} -- {selectedSnapshot}</p>
-
+  <div class="card">
+    <h3>Choose snapshot</h3>
+    {#if snapList}
+      {#each snapList as sn}
+        <label>
+          <input type="radio" bind:group={selectedSnapshot} value={sn} />
+          {sn}
+        </label>
+        <br />
+      {/each}
+    {/if}
+  </div>
+</div>
+<div class="btn">
+  {#if selectedSnapshot}
+    <button class="btn-style">Start VM</button>
+  {/if}
 </div>
