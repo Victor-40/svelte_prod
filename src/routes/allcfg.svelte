@@ -126,6 +126,13 @@
     text-align: left;
     vertical-align: top;
   }
+   .btn-style {
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+  }
 </style>
 
 <svelte:head>
@@ -174,7 +181,7 @@
   </table>
 
   <br />
-  <button on:click={showSelected}>Show selected</button>
+  <button class="btn-style" on:click={showSelected}>Show selected</button>
   <hr />
   <table>
     <tr>

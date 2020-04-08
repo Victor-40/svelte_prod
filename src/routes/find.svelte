@@ -72,6 +72,13 @@
   h3 {
     margin-top: 30px;
   }
+   .btn-style {
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+  }
 </style>
 
 <h2>Find Setups and start Testset</h2>
@@ -106,7 +113,7 @@
 </label>
 <br />
 <br />
-<button on:click={findSetups}>Find Setups</button>
+<button class="btn-style" on:click={findSetups}>Find Setups</button>
 <hr />
 
 {#if showParam}
@@ -119,13 +126,13 @@
 {/if}
 <br />
 {#if setupCount}
-  <button on:click={makeXls}>Make XLS config</button>
+  <button class="btn-style" on:click={makeXls}>Make XLS config</button>
   <hr />
   <h2>{cfgCount} record(s) was created for Testset</h2>
 {/if}
 
 {#if cfgCount}
-  <button on:click={startTestset}>Start Testset</button>
+  <button class="btn-style" on:click={startTestset}>Start Testset</button>
 {/if}
 
 <!-- {#each fullCfg as item}
