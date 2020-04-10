@@ -3,10 +3,10 @@
   import { onMount } from "svelte";
 
   const path = "http://rum-cherezov-dt:5000/api/cfg";
-  
+
   let freeVm = [];
   let busyVm = [];
-  
+
   function test_cfg(c) {
     // console.log(c);
     for (let key in c) {
@@ -18,73 +18,67 @@
         busyVm = busyVm;
       }
     }
-  };
+  }
 
-// onMount(getTodos());
+  // onMount(getTodos());
 
-// function getTodos() {
-axios
-  .get(path)
-  .then(response  => {
+  // function getTodos() {
+  axios.get(path).then(response => {
     test_cfg(response.data);
   });
 </script>
 
 <style>
-  /* table {
-    border: 1px solid;
-  } */
-  td,
-  th {
-    padding-left: 7em;
-    text-align: left;
-    vertical-align: top;
-  }
-  .layer {
-    width: 80%;
-    margin: 0 auto;
-  }
   h2 {
     text-align: center;
+  }
+  h3 {
+    /* text-align: center; */
     margin-bottom: 30px;
+    font-weight: bold;
   }
   ul {
     list-style: none;
     padding-left: 0;
     /* vertical-align: top; */
   }
-	.busy {
-		color: red;
-	}
+  .busy {
+    color: red;
+  }
+  .wrapper {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 250px 250px;
+    grid-column-gap: 50px;
+    justify-content: center;
+  }
+  .card {
+    padding: 10px;
+    /* background-color: aquamarine; */
+  }
 </style>
 
 <svelte:head>
   <title>About</title>
 </svelte:head>
 
-<div>
-  <h2>Virtual Machines status</h2>
-  <table class="layer">
-    <tr>
-      <th>Free VM(s)</th>
-      <th>Busy VM(s)</th>
-    </tr>
-    <tr>
-      <td>
-        <ul>
+<h2>Virtual machines status</h2>
+  <div class="wrapper">
+    <div class="card">
+    <h3>Free VM(s)</h3>
+       <ul>
           {#each freeVm as free}
             <li>{free}</li>
           {/each}
         </ul>
-      </td>
-
-      <td>
-        <ul class="busy">
+    </div>
+    <div class="card">
+    <h3>Busy VM(s)</h3>
+      <ul class="busy">
           {#each busyVm as busy}
             <li>{busy}</li>
           {/each}
         </ul>
-      </td>
-    </tr>
-  </table>
-</div>
+    </div>
+  </div>
+

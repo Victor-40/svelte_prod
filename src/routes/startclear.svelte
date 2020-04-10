@@ -37,8 +37,9 @@
 
 <style>
   h3 {
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 30px;
+    font-weight: bold;
   }
   .wrapper {
     margin-top: 30px;
