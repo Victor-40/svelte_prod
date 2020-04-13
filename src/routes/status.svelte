@@ -49,7 +49,7 @@
     margin-top: 30px;
     display: grid;
     grid-template-columns: 250px 250px;
-    grid-column-gap: 50px;
+    grid-column-gap: 30px;
     justify-content: center;
   }
   .card {

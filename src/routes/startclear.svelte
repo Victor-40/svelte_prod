@@ -2,7 +2,8 @@
   import axios from "axios";
   import { onMount } from "svelte";
 
-  const path = "http://rum-cherezov-dt:5000/api/startclear";
+  const path_cfg = "http://rum-cherezov-dt:5000/api/cfg";
+  const path_run = "http://rum-cherezov-dt:5000/api/startclear";
 
   let freeVm = [];
   let snapList = [];
@@ -16,7 +17,9 @@
   function test_cfg(c) {
     // console.log(c);
     for (let key in c) {
-      freeVm.push(key);
+      if (c[key].status == 'free') {
+        freeVm.push(key);
+      }
     }
     freeVm = freeVm;
     allCfg = c;
@@ -26,7 +29,7 @@
   // onMount(getTodos());
 
   // function getTodos() {
-  axios.get(path).then(response => {
+  axios.get(path_cfg).then(response => {
     test_cfg(response.data);
     // allCfg = response.data;
     // allCfg = allCfg;
@@ -36,6 +39,9 @@
 </script>
 
 <style>
+  h2 {
+    text-align: center;
+  }
   h3 {
     /* text-align: center; */
     margin-bottom: 30px;
@@ -44,7 +50,7 @@
   .wrapper {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: 400px 300px;
+    grid-template-columns: 350px 300px;
     grid-column-gap: 50px;
     justify-content: center;
   }
@@ -73,6 +79,7 @@
   <title>ClearVM</title>
 </svelte:head>
 
+<h2>Start clear virtual machine</h2>
 <div class="wrapper">
   <div class="card">
     <h3>Choose free VM</h3>

@@ -79,9 +79,14 @@
     color: white;
     background-color: green;
   }
+  .wrapper {
+    padding-left: 50px;
+  }
 </style>
 
 <h2>Find Setups and start Testset</h2>
+
+<div class="wrapper">
 <h3>Input build tag</h3>
 <input size="50" maxlength="50" bind:value={tag} />
 <h3>Input build number</h3>
@@ -134,7 +139,7 @@
 {#if cfgCount}
   <button class="btn-style" on:click={startTestset}>Start Testset</button>
 {/if}
-
+</div>
 <!-- {#each fullCfg as item}
   <ul>
     <li>{item}</li>
