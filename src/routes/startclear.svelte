@@ -10,7 +10,7 @@
   let allCfg = {};
   let selectedVm = "";
   let selectedSnapshot = "";
-  let snaplist = [];
+  
 
   // $: snapList = allCfg[selectedVm].snap;
 
@@ -25,7 +25,12 @@
     allCfg = c;
     console.log(allCfg);
   }
-
+  function start_vm() {
+    let vm_cfg = {'vm': selectedVm, 'snap': selectedSnapshot};
+    axios.post(path_run, vm_cfg).then(response=> {
+      console.log(response.data)
+    })
+  }
   // onMount(getTodos());
 
   // function getTodos() {
@@ -117,6 +122,6 @@
 </div>
 <div class="btn">
   {#if selectedSnapshot}
-    <button class="btn-style">Start VM</button>
+    <button class="btn-style" on:click={start_vm}>Start VM</button>
   {/if}
 </div>
