@@ -5,6 +5,7 @@
   let build = "";
   let subdir = "";
   let showParam = false;
+  let vs2019 = false;
 
   $: tag = tag.replace("git--", "");
   $: build = tag.match(/\.(\d\d\d\d)_/) ? tag.match(/\.(\d\d\d\d)_/)[1] : "";
@@ -25,6 +26,14 @@
   let fullCfg = [];
   // let resp
 
+  function clean() {
+    setupCount = 0;
+    cfgCount = 0;
+    resp_cfg = {};
+    showParam = false;
+
+  }
+
   function findSetups() {
     const path = "http://rum-cherezov-dt:5000/api/findsetups";
     showParam = true;
@@ -32,10 +41,11 @@
     setupParams.tag = tag;
     setupParams.subdir = subdir;
     setupParams.products = checkedNames;
+    setupParams.vs2019 = vs2019;
 
     axios.post(path, setupParams).then(response => {
       resp_cfg = response.data;
-      // console.log(resp_cfg);
+      console.log(resp_cfg);
       resp_cfg = resp_cfg;
       setupCount = resp_cfg.length;
     });
@@ -100,6 +110,12 @@
   </label>
   <br />
 {/each}
+
+<h3>Check if VS_2019 configuration:</h3>
+<label>
+  <input type="checkbox" bind:checked={vs2019} on:change={clean}>
+  VS 2019
+</label>
 
 <h3>Select subdir:</h3>
 <label>
